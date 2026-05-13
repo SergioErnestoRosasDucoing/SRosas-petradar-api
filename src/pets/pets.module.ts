@@ -6,11 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LostPet } from './entities/lost-pet.entity';
 import { FoundPet } from './entities/found-pet.entity';
 import { EmailModule } from 'src/email/email.module';
+import { CacheModule } from 'src/cache/cache.module';
 
 @Module({
   imports: [ 
     TypeOrmModule.forFeature([LostPet, FoundPet]),
-    EmailModule
+    EmailModule,
+    CacheModule
   ],
   controllers: [LostPetsController, FoundPetsController],
   providers: [PetsService],

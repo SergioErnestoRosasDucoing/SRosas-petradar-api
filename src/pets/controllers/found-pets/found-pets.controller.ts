@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get } from '@nestjs/common';
 import { CreateFoundPetDto } from 'src/pets/dto/create-found-pet.dto';
 import { PetsService } from 'src/pets/services/pets/pets.service';
 
@@ -11,4 +11,8 @@ export class FoundPetsController {
         return await this.petsService.createFoundPet(createFoundPetDto);
     }
     
+    @Get()
+    async findAll() {
+        return await this.petsService.findAllFound();
+    }
 }

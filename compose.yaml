@@ -1,6 +1,30 @@
 services:
+
+  petradar-api:
+    image: ghcr.io/sergioernestorosasducoing/petradar-api:latest
+    container_name: PetRadarAPI
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=${PORT}
+      - MAILER_EMAIL=${MAILER_EMAIL}
+      - MAILER_PASSWORD=${MAILER_PASSWORD}
+      - MAILER_SERVICE=${MAILER_SERVICE}
+      - MAPBOX_TOKEN=${MAPBOX_TOKEN}
+      - DB_HOST=postgres
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - APPINSIGHTS_CONNECTION_STRING=${APPINSIGHTS_CONNECTION_STRING}
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT}
+    depends_on:
+      - postgres
+      - redis
+
   postgres:
-    image: postgis/postgis:16-master
+    image: postgis/postgis:16-3.4
     container_name: PetRadarDB
     ports:
       - 5432:5432
@@ -11,5 +35,14 @@ services:
     volumes:
       - petradardb_data:/var/lib/postgresql/data
 
+  redis:
+    image: redis:latest
+    container_name: petradar-redis
+    ports:
+      - 6379:6379
+    volumes:
+      - petradar_redis_data:/data
+
 volumes:
   petradardb_data:
+  petradar_redis_data:
