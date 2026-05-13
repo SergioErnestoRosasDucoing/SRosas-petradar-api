@@ -3,6 +3,7 @@ services:
   petradar-api:
     image: ghcr.io/sergioernestorosasducoing/petradar-api:latest
     container_name: PetRadarAPI
+    platform: linux/amd64
     ports:
       - 3000:3000
     environment:
@@ -26,6 +27,7 @@ services:
   postgres:
     image: postgis/postgis:16-3.4
     container_name: PetRadarDB
+    platform: linux/amd64 
     ports:
       - 5432:5432
     environment:
