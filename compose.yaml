@@ -27,7 +27,6 @@ services:
   postgres:
     image: postgis/postgis:16-3.4
     container_name: PetRadarDB
-    platform: linux/amd64 
     ports:
       - 5432:5432
     environment:
